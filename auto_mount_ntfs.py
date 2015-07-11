@@ -3,7 +3,7 @@
 import os
 import subprocess
 import re
-def main():
+def auto_mount():
 	#subprocess.call("sudo blkid")
 	mount_point_pre = "/media/"
 	label = 'C'
@@ -54,4 +54,4 @@ def mkdir(path):
 		# 如果目录存在则不创建，并提示目录已存在
 		print path+' 目录已存在'
 		return False
-main()
+auto_mount()
