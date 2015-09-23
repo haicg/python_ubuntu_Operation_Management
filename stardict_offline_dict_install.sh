@@ -6,6 +6,13 @@
 #将下载好的离线安装包解压到本程序生成的dict文件夹下，
 #也可以自己手动创建dict
 #然后再运行本脚本，本脚本会讲dict目录下所有的词典文件都复制到/usr/share/stardict/dic目录下
+
+ppath=`which stardict`
+if [ -z $ppath]; then
+    echo "Install stardict"
+    sudo apt-get install stardict
+fi
+
 if [ ! -e stardict-powerword2011_1_900-2.4.2.tar.bz2 ];
 then
     wget http://abloz.com/huzheng/stardict-dic/PowerWord/2011/stardict-powerword2011_1_900-2.4.2.tar.bz2
@@ -26,15 +33,17 @@ tar -jxvf "stardict-cedict-gb-2.4.2.tar.bz2" -C dict
 #tar -jxvf "stardict-oald-cn-2.4.2.tar.bz2" -C dict
 
 
+stardict_path=/usr/share/stardict/dic
 
 for file in `ls dict`
 do
     echo "file:"$file
     if [ -d "./dict/$file" ]
     then
-        sudo cp  ./dict/$file/*.* /usr/share/stardict/dic
+        sudo cp  ./dict/$file/*.* $stardict_path
         #ls "./dict/$file/"
     else
-        echo "Error"
+        #sudo cp -rf dict/$file /usr/share/stardict/dic
+        sudo cp -rf dict/$file $stardict_path
     fi
 done
