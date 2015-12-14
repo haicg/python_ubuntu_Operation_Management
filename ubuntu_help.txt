@@ -45,3 +45,14 @@ alias rm='mv -t ~/.local/share/Trash/files/'
 10.显卡切换问题
 http://www.linuxidc.com/Linux/2015-04/116647.htm
 sudo amdcccle
+
+11.待机后Wifi无法链接的问题
+方案一:
+sudo service network-manager stop
+sudo rm /var/lib/NetworkManager/NetworkManager.state
+sudo service network-manager start
+
+方案二:
+sudo vim acpi-support
+STOP_SERVICES="networking"
+
