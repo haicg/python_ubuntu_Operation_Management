@@ -17,9 +17,9 @@ def auto_mount():
 	pTypeList = pattern.findall(uuidListStr)
 	for (uuid,pType) in zip(uuidList,pTypeList):
 		if (pType == "ntfs") :
-			mount_point = mount_point_pre + label 
+			mount_point = mount_point_pre + label
 			mkdir(mount_point)
-			appendStr += "UUID=%s	%s	ntfs	defaults	0	0\n" %(uuid, mount_point) 
+			appendStr += "UUID=%s	%s	ntfs	defaults	0	0\n" %(uuid, mount_point)
 			label = chr(ord(label)+1)
 	os.system("cp /etc/fstab /etc/fstab_bak")
 	with open("/etc/fstab", 'a') as fp:
@@ -54,4 +54,5 @@ def mkdir(path):
 		# 如果目录存在则不创建，并提示目录已存在
 		print path+' 目录已存在'
 		return False
+print "You need to be root to run this script"
 auto_mount()
